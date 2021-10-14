@@ -131,7 +131,7 @@ max(fruits, key = len)
 
 
 #Exercise V Write the code to get the string values with 5 or more letters in the name.
-fruits.apply(lambda fruit: len(fruit) > 4)
+fruits[fruits.apply(lambda fruit: len(fruit) > 4)]
 
 
 # In[ ]:
@@ -139,21 +139,21 @@ fruits.apply(lambda fruit: len(fruit) > 4)
 
 #Exercise VI 
 #Use the .apply method with a lambda function to find the fruit(s) containing the letter "o" two or more times.
-fruits.apply(lambda fruit: fruit.count('o') > 1)
+fruits[fruits.apply(lambda fruit: fruit.count('o') > 1)]
 
 
 # In[ ]:
 
 
 #Exercise VII Write the code to get only the string values containing the substring "berry".
-fruits.str.endswith('berry')
+fruits[fruits.str.endswith('berry')]
 
 
 # In[ ]:
 
 
 #Exercise VIII Write the code to get only the string values containing the substring "apple".
-fruits.str.endswith('apple')
+fruits[fruits.str.endswith('apple')]
 
 
 # In[ ]:
