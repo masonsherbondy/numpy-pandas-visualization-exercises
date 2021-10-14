@@ -6,6 +6,7 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import mason_functions as mf
 
 
@@ -146,14 +147,14 @@ fruits[fruits.apply(lambda fruit: fruit.count('o') > 1)]
 
 
 #Exercise VII Write the code to get only the string values containing the substring "berry".
-fruits[fruits.str.endswith('berry')]
+fruits[fruits.str.contains('berry')]
 
 
 # In[ ]:
 
 
 #Exercise VIII Write the code to get only the string values containing the substring "apple".
-fruits[fruits.str.endswith('apple')]
+fruits[fruits.str.contains('apple')]
 
 
 # In[ ]:
@@ -161,4 +162,60 @@ fruits[fruits.str.endswith('apple')]
 
 #Exercise IX Which string value contains the most vowels?
 max(fruits, key = mf.count_vowels)
+
+
+# # Exercises Part III
+
+# In[ ]:
+
+
+#A
+
+letters = pd.Series(list('hnvidduckkqxwymbimkccexbkmqygkxoyndmcxnwqarhyffsjpsrabtjzsypmzadfavyrnndndvswreauxovncxtwzpwejilzjrmmbbgbyxvjtewqthafnbkqplarokkyydtubbmnexoypulzwfhqvckdpqtpoppzqrmcvhhpwgjwupgzhiofohawytlsiyecuproguy'))
+
+
+# In[ ]:
+
+
+#Exercise AI Which letter occurs the most frequently in the letters Series?
+letters.value_counts().nlargest(n = 1, keep = 'all')
+
+
+# In[ ]:
+
+
+#Exercise AII Which letter occurs the Least frequently?
+letters.value_counts().nsmallest(n = 1, keep = 'all')
+
+
+# In[ ]:
+
+
+#Exercise AIII How many vowels are in the Series?
+mf.count_vowels(letters)
+
+
+# In[ ]:
+
+
+#Exercise AIV How many consonants are in the Series?
+mf.count_consonants(letters)
+
+
+# In[ ]:
+
+
+#Exercise AV Create a Series that has all of the same letters but uppercased.
+letters.str.upper()
+
+
+# In[ ]:
+
+
+#Exercise AVI Create a bar plot of the frequencies of the 6 most commonly occuring letters.
+letters.value_counts().nlargest(n = 6, keep = 'first').plot.bar(color = 'm',
+                                                                ec = 'k',
+                                                               width = .9)
+plt.xlabel('Frequent Flier', fontsize = 13, c = 'm')
+plt.ylabel('Flybys', fontsize = 13, c = 'k')
 
