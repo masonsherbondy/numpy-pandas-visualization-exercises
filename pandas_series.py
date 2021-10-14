@@ -217,5 +217,73 @@ letters.value_counts().nlargest(n = 6, keep = 'first').plot.bar(color = 'm',
                                                                 ec = 'k',
                                                                width = .9)
 plt.xlabel('Frequent Flier', fontsize = 13, c = 'm')
-plt.ylabel('Flybys', fontsize = 13, c = 'k')
+plt.ylabel('Flybys', fontsize = 13, c = 'm')
+
+
+# In[ ]:
+
+
+#B
+
+
+numbers = pd.Series(['$796,459.41', '$278.60', '$482,571.67', '$4,503,915.98', '$2,121,418.3', '$1,260,813.3', '$87,231.01', '$1,509,175.45', '$4,138,548.00', '$2,848,913.80', '$594,715.39', '$4,789,988.17', '$4,513,644.5', '$3,191,059.97', '$1,758,712.24', '$4,338,283.54', '$4,738,303.38', '$2,791,759.67', '$769,681.94', '$452,650.23'])
+
+
+# In[ ]:
+
+
+#Exercise BI What is the data type of the numbers Series?
+numbers.dtype
+
+
+# In[ ]:
+
+
+#Exercise BII How many elements are in the number Series?
+numbers.size
+
+
+# In[ ]:
+
+
+#Exercise BIII Perform the necessary manipulations by accessing Series attributes and methods to convert the
+#numbers Series to a numeric data type.
+
+numbers.apply(lambda x: mf.handle_commas(x))
+
+
+# In[ ]:
+
+
+#Exercise BIV Run the code to discover the maximum value from the Series.
+max(numbers, key = lambda x: mf.handle_commas(x))
+
+
+# In[ ]:
+
+
+#Exercise BV Run the code to discover the minimum value from the Series.
+min(numbers, key = lambda x: mf.handle_commas(x))
+
+
+# In[ ]:
+
+
+#Exercise BVI What is the range of the values in the Series?
+range(numbers.size + 1)
+
+
+# In[ ]:
+
+
+#Exercise BVII Bin the data into 4 equally sized intervals or bins and output how many values fall into each bin.
+
+numbers.apply(lambda x: mf.handle_commas(x)).value_counts(bins = 4).sort_index()
+
+
+# In[ ]:
+
+
+#Exercise BVIII Plot the binned data in a meaningful way. Be sure to include a title and axis labels.
+numbers.apply(lambda x: mf.handle_commas(x)).value_counts(bins = 4).sort_index().plot.bar()
 
