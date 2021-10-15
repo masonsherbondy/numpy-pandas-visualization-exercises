@@ -213,11 +213,12 @@ letters.str.upper()
 
 
 #Exercise AVI Create a bar plot of the frequencies of the 6 most commonly occuring letters.
-letters.value_counts().nlargest(n = 6, keep = 'first').plot.bar(color = 'm',
+letters.value_counts(normalize = True).nlargest(n = 6, keep = 'first').plot.bar(color = 'm',
                                                                 ec = 'k',
                                                                width = .9)
-plt.xlabel('Frequent Flier', fontsize = 13, c = 'm')
-plt.ylabel('Flybys', fontsize = 13, c = 'm')
+plt.xlabel('Alphabetical Frequenter', fontsize = 13, c = 'm')
+plt.ylabel('Frequency', fontsize = 13, c = 'm')
+plt.title('Letters Frequency', fontsize = 16, c = 'r')
 
 
 # In[ ]:
@@ -357,9 +358,17 @@ curved_grades
 #value of letter grades. For example, 86 should be a 'B' and 95 should be an 'A'. Save this as a Series named 
 #letter_grades.
 
+letter_grades = curved_grades.apply(lambda x: mf.get_letter_grade(x))
+letter_grades
+
 
 # In[ ]:
 
 
 #Exercise CVI Plot your new categorical letter_grades Series in a meaninful way and include a title and axis labels.
+plt.figure(figsize = (8, 5))
+letter_grades.value_counts(ascending = True).plot.barh(color = 'purple', ec = 'k', width = .88)
+plt.title('Letter Grades', fontsize = 16, c = 'indigo')
+plt.xlabel('Quantity', fontsize = 13, c = 'm')
+plt.ylabel('Letter Grade', fontsize = 13, c = 'purple')
 
