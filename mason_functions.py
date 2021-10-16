@@ -348,3 +348,23 @@ def count_consonants(string):
 
 count_consonants('Shoryuken!')
 
+
+# In[ ]:
+
+
+#count letters in a word
+def count_characters(string):
+    count = 0
+    for x in string:
+        if x.isalnum():
+            count += 1
+    return count
+
+count_characters('Tatsumaki Senpukyaku!')
+
+
+# In[ ]:
+
+
+
+
