@@ -356,7 +356,7 @@ count_consonants('Shoryuken!')
 def count_characters(string):
     count = 0
     for x in string:
-        if x.isalnum():
+        if x.isalnum() or x == ' ':
             count += 1
     return count
 
@@ -366,5 +366,13 @@ count_characters('Tatsumaki Senpukyaku!')
 # In[ ]:
 
 
+#Is it true, Brutus? Ay tu?
+def count_Trues(list):
+    count = 0
+    for bool in list:
+        if bool == True:
+            count += 1
+    return count
 
+count_Trues([True, False, True, False, True, False, True])
 

@@ -367,17 +367,12 @@ count_characters('Tatsumaki Senpukyaku!')
 
 
 #Is it true, Brutus? Ay tu?
-def is_True(bool):
-    if bool == True:
-        return True
-    else:
-        return False
+def count_Trues(list):
+    count = 0
+    for bool in list:
+        if bool == True:
+            count += 1
+    return count
 
-is_True(True)
-
-
-# In[ ]:
-
-
-
+count_Trues([True, False, True, False, True, False, True])
 
