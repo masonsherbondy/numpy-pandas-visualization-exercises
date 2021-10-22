@@ -218,7 +218,7 @@ data('mpg', show_doc = True)
 mpg.shape
 
 
-# In[18]:
+# In[17]:
 
 
 #Exercise 8 Check out your column names and perform any cleanup you may want on them.
@@ -226,7 +226,7 @@ mpg.rename(columns = {'cty': 'city'}, inplace = True)
 mpg
 
 
-# In[19]:
+# In[18]:
 
 
 #Exercise 9 Display the summary statistics for the dataset.
@@ -234,21 +234,21 @@ mpg.info()
 mpg.describe()
 
 
-# In[20]:
+# In[19]:
 
 
 #Exercise 10 How many different manufacturers are there?
 len(mpg.manufacturer.unique())
 
 
-# In[21]:
+# In[20]:
 
 
 #Exercise 11 How many different models are there?
 len(mpg.model.unique())
 
 
-# In[22]:
+# In[21]:
 
 
 #Exercise 12 Create a column named mileage_difference like you did in the DataFrames exercises; this column should
@@ -257,7 +257,7 @@ mpg['mileage_difference'] = mpg.hwy - mpg.city
 mpg
 
 
-# In[23]:
+# In[22]:
 
 
 #Exercise 13 Create a column named average_mileage like you did in the DataFrames exercises; this is the mean of the
@@ -266,7 +266,7 @@ mpg['average_mileage'] = mpg[['city', 'hwy']].mean(axis = 1)
 mpg
 
 
-# In[24]:
+# In[23]:
 
 
 #Exercise 14 Create a new column on the mpg dataset named is_automatic that holds boolean values denoting whether
@@ -275,7 +275,7 @@ mpg['is_automatic'] = mpg.trans.str.contains('auto')
 mpg
 
 
-# In[25]:
+# In[24]:
 
 
 #Exercise 15 Using the mpg dataset, find out which which manufacturer has the best miles per gallon on average?
@@ -285,7 +285,7 @@ if __name__ == '__main__':
 (mpg.groupby('manufacturer').average_mileage.max()).idxmax()
 
 
-# In[26]:
+# In[25]:
 
 
 #Exercise 16 Do automatic or manual cars have better miles per gallon?
@@ -297,7 +297,7 @@ mpg.groupby('is_automatic').average_mileage.max().nlargest(n = 1, keep = 'all')
 
 # # Exercises Part III
 
-# In[27]:
+# In[26]:
 
 
 #Exercise 1 Use your get_db_url function to help you explore the data from the chipotle database.
@@ -312,7 +312,7 @@ chipotle.info()
 chipotle
 
 
-# In[28]:
+# In[27]:
 
 
 #Exercise 2 What is the total price for each order?
@@ -323,21 +323,21 @@ total_prices = chipotle.groupby('order_id').prices_as_floats.sum()
 total_prices
 
 
-# In[29]:
+# In[28]:
 
 
 #Exercise 3 What are the most popular 3 items?
 chipotle.groupby('item_name').quantity.sum().nlargest(n = 3, keep = 'all')
 
 
-# In[30]:
+# In[29]:
 
 
 #Exercise 4 Which item has produced the most revenue?
 chipotle.groupby('item_name').prices_as_floats.sum().nlargest(n = 1, keep = 'all')
 
 
-# In[31]:
+# In[30]:
 
 
 #Exercise 5 Join the employees and titles DataFrames together.
@@ -345,7 +345,7 @@ titles_and_emps = t_df.merge(e_df, on = 'emp_no', how = 'inner')
 titles_and_emps.head()
 
 
-# In[32]:
+# In[31]:
 
 
 #Exercise 6 For each title, find the hire date of the employee that was hired most recently with that title.
@@ -356,7 +356,7 @@ if __name__ == '__main__':
     print(titles_and_emps.groupby('title').hire_date.max())
 
 
-# In[33]:
+# In[32]:
 
 
 #Exercise 7 Write the code necessary to create a cross tabulation of the number of titles by department. 

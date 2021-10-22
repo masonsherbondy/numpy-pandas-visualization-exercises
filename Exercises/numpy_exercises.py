@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
 #Exercise 7 Calculate the z-score for each data point.
 s_dev = a.std()
-z_score = (a - this_mean) / s_dev
+z_score = centered / s_dev
 if __name__ == '__main__':
     print(z_score)
 
@@ -148,7 +148,7 @@ b.shape
 b.transpose
 
 # Exercise 11 - reshape the array b to be a single list of 6 numbers. (1 x 6)
-b.reshape((1, 6))
+b.flatten()
 
 # Exercise 12 - reshape the array b to be a list of 6 lists, each containing only 1 number (6 x 1)
 b.reshape((6, 1))
@@ -166,7 +166,7 @@ c = np.array(c)
 c.min()
 c.max()
 c.sum()
-product_c = np.product(c)
+c.prod()
 # Exercise 2 - Determine the standard deviation of c.
 c.std()
 # Exercise 3 - Determine the variance of c.
