@@ -6,6 +6,7 @@
 
 import pandas as pd
 import numpy as np
+import mason_functions as mf
 
 
 # # Exercises Part I
@@ -33,7 +34,7 @@ tt = pd.read_sql(sql, url)
 tt.head()
 
 
-# In[4]:
+# In[ ]:
 
 
 #Exercise 5a  Intentionally make a typo in the database url. What kind of error message do you see?
@@ -71,7 +72,7 @@ q4
 #(Background on this error at: http://sqlalche.me/e/14/e3q8)
 
 
-# In[5]:
+# In[4]:
 
 
 sql = """ 
@@ -82,7 +83,7 @@ q4 = pd.read_sql(sql, url)
 q4
 
 
-# In[6]:
+# In[5]:
 
 
 #Exercise 6 Read the employees and titles tables into two separate DataFrames.
@@ -100,13 +101,13 @@ e_df = pd.DataFrame(employees_table)
 t_df = pd.DataFrame(titles_table)
 
 
-# In[7]:
+# In[6]:
 
 
 t_df
 
 
-# In[8]:
+# In[7]:
 
 
 #Exercise 7 How many rows and columns do you have in each DataFrame? Is that what you expected?
@@ -116,7 +117,7 @@ if __name__ == '__main__':
 #kinda
 
 
-# In[9]:
+# In[8]:
 
 
 #Exercise 8 Display the summary statistics for each DataFrame.
@@ -126,14 +127,14 @@ e_df.info()
 e_df.describe()
 
 
-# In[10]:
+# In[9]:
 
 
 #Exercise 9 How many unique titles are in the titles DataFrame?
 len(t_df.title.unique())
 
 
-# In[11]:
+# In[10]:
 
 
 #Exercise 10 What is the oldest date in the to_date column?
@@ -141,7 +142,7 @@ oldest_to_date = t_df.sort_values(by = 'to_date').head(1)
 oldest_to_date.to_date
 
 
-# In[12]:
+# In[11]:
 
 
 #Exercise 11 What is the most recent date in the to_date column?
@@ -151,7 +152,7 @@ most_recent_to_date.to_date
 
 # # Exercises Part II
 
-# In[13]:
+# In[12]:
 
 
 #Exercise 1 Copy the users and roles DataFrames from the examples above.
@@ -171,21 +172,21 @@ if __name__ == '__main__':
     print(users)
 
 
-# In[14]:
+# In[13]:
 
 
 #Exercise 2 What is the result of using a right join on the DataFrames?
 users.merge(roles, left_on = 'role_id', right_on = 'id', how = 'right')
 
 
-# In[15]:
+# In[14]:
 
 
 #Exercise 3 What is the result of using an outer join on the DataFrames?
 users.merge(roles, left_on = 'role_id', right_on = 'id', how = 'outer')
 
 
-# In[16]:
+# In[ ]:
 
 
 #Exercise 4 What happens if you drop the foreign keys from the DataFrames and try to merge them?
@@ -194,7 +195,7 @@ users.drop(columns = 'role_id', inplace = True)
 users.merge(roles, left_on = 'role_id', right_on = 'id', how = 'outer')
 
 
-# In[17]:
+# In[15]:
 
 
 #Exercise 5 Load the mpg dataset from PyDataset.
@@ -203,21 +204,21 @@ mpg = data('mpg')
 mpg
 
 
-# In[18]:
+# In[16]:
 
 
 #Exercise 6 Output and read the documentation for the mpg dataset.
 data('mpg', show_doc = True)
 
 
-# In[19]:
+# In[17]:
 
 
 #Exercise 7 How many rows and columns are in the dataset?
 mpg.shape
 
 
-# In[20]:
+# In[18]:
 
 
 #Exercise 8 Check out your column names and perform any cleanup you may want on them.
@@ -225,7 +226,7 @@ mpg.rename(columns = {'cty': 'city'}, inplace = True)
 mpg
 
 
-# In[21]:
+# In[19]:
 
 
 #Exercise 9 Display the summary statistics for the dataset.
@@ -233,21 +234,21 @@ mpg.info()
 mpg.describe()
 
 
-# In[22]:
+# In[20]:
 
 
 #Exercise 10 How many different manufacturers are there?
 len(mpg.manufacturer.unique())
 
 
-# In[23]:
+# In[21]:
 
 
 #Exercise 11 How many different models are there?
 len(mpg.model.unique())
 
 
-# In[24]:
+# In[22]:
 
 
 #Exercise 12 Create a column named mileage_difference like you did in the DataFrames exercises; this column should
@@ -256,7 +257,7 @@ mpg['mileage_difference'] = mpg.hwy - mpg.city
 mpg
 
 
-# In[25]:
+# In[23]:
 
 
 #Exercise 13 Create a column named average_mileage like you did in the DataFrames exercises; this is the mean of the
@@ -265,7 +266,7 @@ mpg['average_mileage'] = mpg[['city', 'hwy']].mean(axis = 1)
 mpg
 
 
-# In[26]:
+# In[24]:
 
 
 #Exercise 14 Create a new column on the mpg dataset named is_automatic that holds boolean values denoting whether
@@ -274,7 +275,7 @@ mpg['is_automatic'] = mpg.trans.str.contains('auto')
 mpg
 
 
-# In[27]:
+# In[25]:
 
 
 #Exercise 15 Using the mpg dataset, find out which which manufacturer has the best miles per gallon on average?
@@ -284,7 +285,7 @@ if __name__ == '__main__':
 (mpg.groupby('manufacturer').average_mileage.max()).idxmax()
 
 
-# In[28]:
+# In[26]:
 
 
 #Exercise 16 Do automatic or manual cars have better miles per gallon?
@@ -292,6 +293,86 @@ mpg.groupby('is_automatic').average_mileage.max()
 (mpg.groupby('is_automatic').average_mileage.max()).idxmax()
 mpg.groupby('is_automatic').average_mileage.max().nlargest(n = 1, keep = 'all')
 #manual cars have better mpg
+
+
+# # Exercises Part III
+
+# In[27]:
+
+
+#Exercise 1 Use your get_db_url function to help you explore the data from the chipotle database.
+url = get_db_url('chipotle')
+sql = """
+SELECT *
+FROM orders
+"""
+chipotle = pd.read_sql(sql, url)
+chipotle.describe()
+chipotle.info()
+chipotle
+
+
+# In[28]:
+
+
+#Exercise 2 What is the total price for each order?
+type(chipotle.groupby('order_id').item_price.sum())
+chipotle_orders = chipotle.groupby('order_id').item_price.sum()
+chipotle['prices_as_floats'] = chipotle.item_price.apply(lambda x: mf.handle_commas(x))
+total_prices = chipotle.groupby('order_id').prices_as_floats.sum()
+total_prices
+
+
+# In[29]:
+
+
+#Exercise 3 What are the most popular 3 items?
+chipotle.groupby('item_name').quantity.sum().nlargest(n = 3, keep = 'all')
+
+
+# In[30]:
+
+
+#Exercise 4 Which item has produced the most revenue?
+chipotle.groupby('item_name').prices_as_floats.sum().nlargest(n = 1, keep = 'all')
+
+
+# In[31]:
+
+
+#Exercise 5 Join the employees and titles DataFrames together.
+titles_and_emps = t_df.merge(e_df, on = 'emp_no', how = 'inner')
+titles_and_emps.head()
+
+
+# In[32]:
+
+
+#Exercise 6 For each title, find the hire date of the employee that was hired most recently with that title.
+titles_and_emps.hire_date = pd.to_datetime(titles_and_emps.hire_date)
+titles_and_emps.from_date = pd.to_datetime(titles_and_emps.from_date)
+if __name__ == '__main__':
+    print(titles_and_emps.groupby('title').from_date.max())
+    print(titles_and_emps.groupby('title').hire_date.max())
+
+
+# In[33]:
+
+
+#Exercise 7 Write the code necessary to create a cross tabulation of the number of titles by department. 
+#(Hint: this will involve a combination of SQL code to pull the necessary data and python/pandas code to perform 
+#the manipulations.)
+url = get_db_url('employees')
+sql = """
+SELECT title, dept_name
+FROM employees
+JOIN titles USING(emp_no)
+JOIN dept_emp USING(emp_no)
+JOIN departments USING(dept_no)
+WHERE dept_emp.to_date > NOW()
+"""
+the_crosst = pd.read_sql(sql, url)
+pd.crosstab(the_crosst.title, the_crosst.dept_name)
 
 
 # In[ ]:
