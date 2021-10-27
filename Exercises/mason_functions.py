@@ -153,9 +153,9 @@ get_letter_grade(69)
 def remove_vowels(string):
     #assign a variable to an empty string
     v_removed = ''
-    #start a loop to check if characters in input string are vowel-opposites
+    #start a loop to check if characters in input string are not vowels
     for l in string:
-        if is_consonant(l):
+        if not is_vowel(l):
             #only add vowel-opposite characters to the string variable
             v_removed += l
     #return the string variable with characters that are not vowels
@@ -219,7 +219,7 @@ if __name__ == '__main__':
 #cumulative_sum([1, 2, 3, 4]) returns [1, 3, 6, 10]
 
 #interpretation
-#if A = [1, 1, 1], then cumulative_sum(A) = [A[0], (A[0] + A[1]), (A[0] + A[1] + A[2])]
+#if A = [1, 1, 1], then cumulative_sum(A) = [(A[0]), (A[0] + A[1]), (A[0] + A[1] + A[2])]
 #cumulative_sum(A) = [sum(A[:1]), sum(A[:2]), sum(A[:3])]
 #cumulative_sum(A) = [sum(A[:0 + 1]), sum(A[:1 + 1]), sum(A[:2 + 1])]
 #range(len(A)) = range(0, 3) --> which is zero to two (0, 1, 2)--> which is the complete index for A
@@ -246,17 +246,17 @@ cumulative_sum(c)
 
 
 #pull a number from a string with one number 
-def pull_a_number_from_a_string_with_one_number(string):
+def pull_an_integer_from_a_string_with_one_integer(string):
     number = ''
     for char in string:
         if char.isdigit():
             number += char
     return int(number)
 
-pull_a_number_from_a_string_with_one_number('Yo! You have 38 unread messages!')
-#good to alias it as 'pn'
+pull_an_integer_from_a_string_with_one_integer('Yo! You have 38 unread messages!')
+#good to alias it as 'pin'
 #can copy and paste below after '#' marker:
-#from mason_functions import pull_a_number_from_a_string_with_one_number as pn
+#from mason_functions import pull_an_integer_from_a_string_with_one_integer as pin
 
 
 # In[ ]:
@@ -295,8 +295,8 @@ def median(x):
     #assign a variable to the total number of items in the list (how many data points do we have?)
     l = len(x)
     #assign a variable to half of the total of numbers(data points) in the list. If the list is even or odd, the
-    #value of this variable an integer to represent how many times the value two goes into the total of numbers,
-    #i.e., 9 // 2 = 4 and 8 // 2 = 4
+    #value of this variable is an integer that represents how many times the value two goes into the total of
+    #numbers, i.e., 9 // 2 = 4 and 8 // 2 = 4
     n = l // 2
     #introduce an 'if' conditional to determine if the total number of datapoints is odd
     if l % 2 == 1:
@@ -347,20 +347,6 @@ def count_consonants(string):
     return count
 
 count_consonants('Shoryuken!')
-
-
-# In[ ]:
-
-
-#count letters in a word
-def count_characters(string):
-    count = 0
-    for x in string:
-        if x.isalnum() or x == ' ':
-            count += 1
-    return count
-
-count_characters('Tatsumaki Senpukyaku!')
 
 
 # In[ ]:
